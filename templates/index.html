@@ -1,6 +1,20 @@
+{% extends 'base.html' %}
+
 {% block head %}
     
 {% endblock %}
 {% block body %}
-    ll
+<h1 class="d-flex justify-content-center">Flasky<span style="color: #FFC118; margin: 0;">POST</span></h1>
+<br>
+<div class="content" style="margin-top: 0;">
+    {% for post in posts %}
+    <div class="posts d-flex flex-column justify-content-between" style="background-color: #FFC118; padding: 20px; width: 700px; margin: auto;">
+        <h1 style="text-align: center;">{{ post.title }}</h1>
+        <p style="text-align: center;">Posted by {{ post.author }}</p>
+        <p style="text-align: center;">Content: {{ post.content }}</p>
+        <p style="text-align: center;">Date: {{ post.date_posted }}</p>
+    </div>
+    <br>
+    {% endfor %}
+</div>
 {% endblock %}
