@@ -7,3 +7,7 @@ body {
 header {
   margin-bottom: 80px;
 }
+
+nav {
+  background-color: rgba(55, 62, 68, 0.6);
+}
