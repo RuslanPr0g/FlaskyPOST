@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
 from datetime import datetime
 
@@ -27,15 +27,25 @@ def index():
     return render_template('index.html', posts=posts)
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(
+            f'Successfully!', 'success')
+        return redirect(url_for('index'))
     return render_template('signup.html', form=form)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'theruslan.prog@gmail.com' and form.password.data == '12345':
+            flash('Successfully!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Wrong email or password.', 'danger')
     return render_template('login.html', form=form)
 
 

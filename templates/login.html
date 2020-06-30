@@ -2,7 +2,62 @@
 {% block head %}
 {% endblock %}
 {% block body %}
-<div class="login">
+<div class="signup d-flex justify-content-center" style="width: 500px; margin: auto;">
+    <form action="" method="POST" style="width: 500px;">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group" style="color: #FFF;">
+        <legend class="border-bottom mb-4 pb-2 text-center">Log In</legend>
+        <div class="form-group">
+            {{ form.email.label(class="form-control-label") }}
+            
+            {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>
+                            {{ error }}
+                        </span>
+                    {% endfor %}
+                </div>
+            {% else %}
+            {{ form.email(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
 
+        <div class="form-group">
+            {{ form.password.label(class="form-control-label") }}
+            
+            {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>
+                            {{ error }}
+                        </span>
+                    {% endfor %}
+                </div>
+            {% else %}
+            {{ form.password(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-check">
+            {{ form.remember(class="form-check-input") }}
+            {{ form.remember.label(class="form-check-label") }}
+        </div>
+
+        <small class="text-muted ml-3">
+            <a href="#" style="color: rgb(213,161,6);">Help, I've Forgot My Password</a>
+        </small>
+    </fieldset>
+    <div class="form-group d-flex justify-content-center">
+        {{ form.submit(class="btn btn-outline-warning") }}
+    </div>
+    </form>
+</div>
+<div style="width: 550px; margin: auto;">
+    <small class="text-muted">
+       <span style="color: #FFF;">Have No Account?</span> <a href="{{ url_for('signup') }}" class="ml-2" style="color: #FFC118;">Sign Up</a> 
+    </small>
 </div>
 {% endblock %}
