@@ -1,25 +1,13 @@
+from models import User, Post
 from flask import Flask, render_template, url_for, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
-from datetime import datetime
+from models import User, Post
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = '25613c65532b1973abc984a0faa7aecf'
-
-posts = [
-    {
-        'author': 'Ruslan',
-        'title': 'Welcome',
-        'content': 'This is the first post.',
-        'date_posted': 'June 29, 2020'
-    },
-    {
-        'author': 'Vlad',
-        'title': 'Join',
-        'content': 'WOw, I have joined here!',
-        'date_posted': 'June 30, 2020'
-    }
-]
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flpst.db'
+db = SQLAlchemy(app)
 
 
 @app.route('/')

@@ -13,7 +13,7 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Flasky<span style="color: #FFC118;">POST</span></a>
+          <a class="navbar-brand mr-4" href="{{ url_for('index') }}">Flasky<span style="color: #FFC118;">POST</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -23,8 +23,8 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="/login" style="color: #FFF;">Log In</a>
-              <a class="nav-item nav-link" href="/signup" style="color: #FFC118;">Sign Up</a>
+              <a class="nav-item nav-link" href="{{ url_for('login') }}" style="color: #FFF;">Log In</a>
+              <a class="nav-item nav-link" href="{{ url_for('signup') }}" style="color: #FFC118;">Sign Up</a>
             </div>
           </div>
         </div>
