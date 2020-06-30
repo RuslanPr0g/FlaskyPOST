@@ -1,7 +1,10 @@
 from flask import Flask, render_template, url_for
+from forms import RegistrationForm, LoginForm
 from datetime import datetime
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = '25613c65532b1973abc984a0faa7aecf'
 
 posts = [
     {
@@ -22,6 +25,12 @@ posts = [
 @app.route('/')
 def index():
     return render_template('index.html', posts=posts)
+
+
+@app.route('/signup/')
+def signup():
+    form = RegistrationForm()
+    return render_template('signup.html', form=form)
 
 
 if __name__ == '__main__':
