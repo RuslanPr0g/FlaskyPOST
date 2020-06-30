@@ -11,3 +11,10 @@ header {
 nav {
   background-color: rgba(55, 62, 68, 0.6);
 }
+
+#hello {
+  color: white;
+  width: 600px;
+  margin: auto;
+  text-align: center;
+}
