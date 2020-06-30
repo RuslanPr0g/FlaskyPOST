@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, request, redirect
 from flaskypost import app, db, bcrypt
 from flaskypost.forms import RegistrationForm, LoginForm
 from flaskypost.models import User, Post
@@ -75,7 +75,8 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            return redirect(url_for('index'))
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('index'))
         else:
             flash('Wrong email or password.', 'danger')
     return render_template('login.html', form=form)
