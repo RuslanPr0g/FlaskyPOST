@@ -13,8 +13,12 @@ nav {
 }
 
 #hello {
-  color: white;
+  color: #fff;
   width: 600px;
   margin: auto;
   text-align: center;
+}
+
+.alert-message {
+  color: #fff;
 }
