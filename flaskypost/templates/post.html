@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div class="post d-flex flex-column justify-content-between">
+    {% if post.author == current_user %}
+        <div class="up-del">
+            <a class="btn btn-outline-secondary m-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+            <button type="button" class="btn btn-outline-danger btn-sm m-1" href="">Delete</button>
+        </div>
+    {% endif %}
+    <div class="post-header">
+        <div class="d-flex justify-content-center"><img class="rounded-circle account-img-post" src="{{ url_for('static', filename='profile_images/' + post.author.image) }}"></div>
+        <h2 class="text-secondary" style="text-align: center; font-size: 20px;">Owner: {{ post.author.username }}</h2>
+    </div>
+    <div class="post-content">
+        <h1 class="display-4 mb-4 article-title" style="text-align: center;">{{ post.title }}</h1>
+        <hr>
+        <p style="text-align: center;" class="post-content-p">{{ post.content }}</p>
+    </div>
+    <p style="margin-top: 40px; font-size: 35px; opacity: 0.8;">- {{ post.date_posted.date() }}</p>
+</div>
+{% endblock %}

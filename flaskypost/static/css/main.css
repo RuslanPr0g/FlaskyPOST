@@ -12,6 +12,33 @@ nav {
   background-color: rgba(55, 62, 68, 0.6);
 }
 
+p {
+  line-height: 35px;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  line-height: 35px;
+  overflow-wrap: break-word;
+  text-overflow: clip;
+}
+
+.post {
+  background-color: rgba(255, 193, 24, 0.9);
+  padding: 20px;
+  margin-bottom: 99px;
+  min-height: fit-content;
+  min-width: 300px;
+}
+
+.post-header {
+  margin-bottom: 10px;
+}
+
+.post-content-p {
+  font-size: 30px;
+}
+
 .btn-outline-warning {
   width: 400px;
 }
@@ -23,6 +50,11 @@ nav {
 .account-img {
   width: 100px;
   margin-right: 70px;
+}
+
+.account-img-post {
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 .alert-message {

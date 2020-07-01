@@ -55,6 +55,6 @@ class UpdateProfileForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    bit = StringField('bit', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
