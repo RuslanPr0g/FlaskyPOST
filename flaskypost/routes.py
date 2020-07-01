@@ -1,6 +1,8 @@
+import os
+import secrets
 from flask import render_template, url_for, flash, request, redirect
 from flaskypost import app, db, bcrypt
-from flaskypost.forms import RegistrationForm, LoginForm
+from flaskypost.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from flaskypost.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -88,7 +90,28 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/profile')
+def save_image_for_user(_image):
+    rand_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(_image.filename)
+    img_fn = rand_hex + f_ext
+    img_path = os.path.join(app.root_path, 'static/profile_images', img_fn)
+
+
+@app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    return render_template('profile.html')
+    form = UpdateProfileForm()
+    if form.validate_on_submit():
+        if form.image.data:
+
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Successfully!', 'success')
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for(
+        'static', filename='profile_images/' + current_user.image)
+    return render_template('profile.html', image_file=image_file, form=form)

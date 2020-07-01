@@ -12,11 +12,17 @@ nav {
   background-color: rgba(55, 62, 68, 0.6);
 }
 
-#hello {
+.btn-outline-warning {
+  width: 400px;
+}
+
+.account-heading {
   color: #fff;
-  width: 600px;
-  margin: auto;
-  text-align: center;
+}
+
+.account-img {
+  width: 100px;
+  margin-right: 70px;
 }
 
 .alert-message {
