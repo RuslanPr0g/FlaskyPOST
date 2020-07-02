@@ -17,7 +17,7 @@
         - {{ post.date_posted.date() }} | {{ post.date_posted.strftime("%H") }}:{{ post.date_posted.strftime("%M") }}
         </div>
         <div class="post-content">
-            <h1 class="display-4 mb-4" style="text-align: center;"><a href="{{ url_for('post', post_id=post.id) }}" class="article-title" style="color: black;">{{ post.title[0:60] }}</a></h1>
+            <h1 class="display-4 mb-4" style="text-align: center;"><a href="{{ url_for('posts.post', post_id=post.id) }}" class="article-title" style="color: black;">{{ post.title[0:60] }}</a></h1>
             <hr>
             <p style="text-align: center;" class="post-content-p">{{ post.content[0:33] }}...</p>
         </div>
@@ -27,9 +27,9 @@
         {% for page_num in posts.iter_pages(left_edge=1, right_edge=2, left_current=1, right_current=2) %}
             {% if page_num %}
                 {% if posts.page == page_num %}
-                    <a class="btn btn-outline-secondary mb-4 ml-1" href="{{ url_for('user', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                    <a class="btn btn-outline-secondary mb-4 ml-1" href="{{ url_for('users.user', username=user.username, page=page_num) }}">{{ page_num }}</a>
                 {% else %}
-                    <a class="btn btn-secondary mb-4 ml-1" href="{{ url_for('user', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                    <a class="btn btn-secondary mb-4 ml-1" href="{{ url_for('users.user', username=user.username, page=page_num) }}">{{ page_num }}</a>
                 {% endif %}
             {% else %}
                 <p class="btn ml-1" style="color: #fff;">...</p>

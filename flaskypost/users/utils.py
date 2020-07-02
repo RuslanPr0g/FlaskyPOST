@@ -25,7 +25,7 @@ def send_token_by_email(user):
     message = Message('Reset Password Request.',
                       sender='theruslanrudenko1992@gmail.com', recipients=[user.email])
     message.body = f''' 
-Reset Password Link: {url_for('password_reset', token=token, _external=True)}
+Reset Password Link: {url_for('users.password_reset', token=token, _external=True)}
 If you haven't made this request, just ignore it.
 '''
     mail.send(message)

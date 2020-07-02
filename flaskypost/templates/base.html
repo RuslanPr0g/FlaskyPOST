@@ -14,7 +14,7 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-            <a class="navbar-brand mr-2" href="{{ url_for('index') }}">Flasky<span style="color: #FFC118;">POST</span></a>
+            <a class="navbar-brand mr-2" href="{{ url_for('main.index') }}">Flasky<span style="color: #FFC118;">POST</span></a>
           {% if current_user.is_authenticated == False%}
             <small class="alert-message">Log In to access more features!</small>
           {% endif %}
@@ -28,12 +28,12 @@
             <!-- Navbar Right Side aka. log-side -->
             <div class="navbar-nav">
             {% if current_user.is_authenticated %}
-                <a class="nav-item nav-link" href="{{ url_for('profile') }}" style="color: #FFC118;">PROFILE</a>
-                <a class="nav-item nav-link" href="{{ url_for('create_post') }}" style="color: #FFF;">POST</a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}" style="color: #FFF;">LOG OUT</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.profile') }}" style="color: #FFC118;">PROFILE</a>
+                <a class="nav-item nav-link" href="{{ url_for('posts.create_post') }}" style="color: #FFF;">POST</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}" style="color: #FFF;">LOG OUT</a>
               {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('login') }}" style="color: #FFF;">LOG IN</a>
-                <a class="nav-item nav-link" href="{{ url_for('signup') }}" style="color: #FFC118;">SIGN UP</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.login') }}" style="color: #FFF;">LOG IN</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.signup') }}" style="color: #FFC118;">SIGN UP</a>
             {% endif %}
                 <a class="text-info ml-3 p-1" target="_blank" href="https://github.com/RuslanPr0g/FlaskyPOST" style="color: #fff;">GITHUB</a>
             </div>

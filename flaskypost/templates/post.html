@@ -5,13 +5,13 @@
 <div class="post d-flex flex-column justify-content-between">
     {% if post.author == current_user %}
         <div class="up-del">
-            <a class="btn btn-secondary m-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+            <a class="btn btn-secondary m-1" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
             <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
         </div>
     {% endif %}
     <div class="post-header">
         <div class="d-flex justify-content-center"><img class="rounded-circle account-img-post" src="{{ url_for('static', filename='profile_images/' + post.author.image) }}"></div>
-        <h2 class="text-secondary" style="text-align: center; font-size: 20px;">Owner: <a class="text-secondary font-weight-bold" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></h2>
+        <h2 class="text-secondary" style="text-align: center; font-size: 20px;">Owner: <a class="text-secondary font-weight-bold" href="{{ url_for('users.user', username=post.author.username) }}">{{ post.author.username }}</a></h2>
     </div>
     <div class="post-content">
         <h1 class="display-4 mb-4 article-title" style="text-align: center;">{{ post.title }}</h1>
@@ -35,7 +35,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+        <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
             <input type="submit" class="btn btn-danger" value="Yes, I understand the consequences">
         </form>
       </div>

@@ -20,4 +20,10 @@ app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 mail = Mail(app)
 
 
-from flaskypost import routes
+from flaskypost.users.routes import users
+from flaskypost.posts.routes import posts
+from flaskypost.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)
