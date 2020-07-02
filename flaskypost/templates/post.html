@@ -11,7 +11,7 @@
     {% endif %}
     <div class="post-header">
         <div class="d-flex justify-content-center"><img class="rounded-circle account-img-post" src="{{ url_for('static', filename='profile_images/' + post.author.image) }}"></div>
-        <h2 class="text-secondary" style="text-align: center; font-size: 20px;">Owner: {{ post.author.username }}</h2>
+        <h2 class="text-secondary" style="text-align: center; font-size: 20px;">Owner: <a class="text-secondary font-weight-bold" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></h2>
     </div>
     <div class="post-content">
         <h1 class="display-4 mb-4 article-title" style="text-align: center;">{{ post.title }}</h1>

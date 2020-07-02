@@ -3,18 +3,39 @@
 {% endblock %}
 {% block body %}
 <div class="content-section">
-  <div class="media">
-    <img class="rounded-circle account-img" src="{{ image_file }}">
-    <div class="media-body">
-      <h2 class="account-heading">{{ user.username }}</h2>
-      <p style="color: #FFC107;">{{ user.email }}</p>
+  <div class="media d-flex flex-column justify-content-center" style="margin-bottom: 90px;">
+    <img class="rounded-circle account-img mb-3" src="{{ url_for('static', filename='profile_images/' + user.image) }}" style="margin: auto;">
+    <div style="margin: auto;">
+      <h2 class="account-heading" style="font-size: 20px; text-align: center;">{{ user.username }}</h2>
+      <p style="color: #FFC107; font-size: 25px; text-align: center;">{{ user.email }}</p>
     </div>
   </div>
-  <div class="d-flex justify-content-center" style="width: 500px; margin: auto;">
-    <form action="" method="POST" enctype="multipart/form-data" style="width: 400px;">
-    {{ form.hidden_tag() }}
-    
-    </form>
-</div>
+
+    {% for post in posts.items %}
+    <div class="post d-flex flex-column justify-content-between">
+        <div class="post-header">
+        - {{ post.date_posted.date() }} | {{ post.date_posted.strftime("%H") }}:{{ post.date_posted.strftime("%M") }}
+        </div>
+        <div class="post-content">
+            <h1 class="display-4 mb-4" style="text-align: center;"><a href="{{ url_for('post', post_id=post.id) }}" class="article-title" style="color: black;">{{ post.title[0:60] }}</a></h1>
+            <hr>
+            <p style="text-align: center;" class="post-content-p">{{ post.content[0:33] }}...</p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="page-nums d-flex justify-content-center" style="width: 330px; margin: auto;">
+        {% for page_num in posts.iter_pages(left_edge=1, right_edge=2, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                    <a class="btn btn-outline-secondary mb-4 ml-1" href="{{ url_for('user', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <a class="btn btn-secondary mb-4 ml-1" href="{{ url_for('user', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                <p class="btn ml-1" style="color: #fff;">...</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}

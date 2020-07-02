@@ -2,6 +2,7 @@
 {% block head %}
 {% endblock %}
 {% block body %}
+<div class="d-flex justify-content-start text-light mb-4">Total posts found: {{ posts.total }}</div>
 {% if current_user.is_authenticated %}
     <!--User Login-->
     {% for post in posts.items %}
@@ -11,7 +12,7 @@
         </div>
         <div class="post-content">
             <h1 class="display-4 mb-4" style="text-align: center;"><a href="{{ url_for('post', post_id=post.id) }}" class="article-title" style="color: black;">{{ post.title[0:60] }}</a></h1>
-            <p class="text-secondary" style="text-align: center; font-size: 20px;">Posted by <a class="text-secondary font-weight-bold stretched-link" href="url_for('user')">{{ post.author.username }}</a></p>
+            <p class="text-secondary" style="text-align: center; font-size: 20px;">Posted by <a class="text-secondary font-weight-bold" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></p>
             <hr>
             <p style="text-align: center;" class="post-content-p">{{ post.content[0:33] }}...</p>
         </div>
@@ -41,12 +42,12 @@
         </div>
         <div class="post-content">
             <h1 class="display-4 mb-4" style="text-align: center;">{{ post.title[0:60] }}</h1>
-            <p class="text-secondary" style="text-align: center; font-size: 20px;">Posted by <a class="text-secondary font-weight-bold stretched-link" href="url_for('user')">{{ post.author.username }}</a></p>
+            <p class="text-secondary" style="text-align: center; font-size: 20px;">Posted by <a class="text-secondary font-weight-bold" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a></p>
             <hr>
             <p style="text-align: center;" class="post-content-p">{{ post.content[0:33] }}...</p>
         </div>
     </div>
     {% endfor %}
-    <div class="d-flex justify-content-center mt-4"><a href="{{ url_for('signup') }}" class="btn btn-success">Sign UP</a> to see more!</div>
+    <div class="d-flex justify-content-center mt-4"><a href="{{ url_for('signup') }}" class="btn btn-success btn-lg">Sign UP</a> <span class="text-light ml-2" style="font-size: 30px;">to see more!</span></div>
 {% endif %}
 {% endblock %}
