@@ -5,8 +5,8 @@
 <div class="post d-flex flex-column justify-content-between">
     {% if post.author == current_user %}
         <div class="up-del">
-            <a class="btn btn-outline-secondary m-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
-            <button type="button" class="btn btn-outline-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            <a class="btn btn-secondary m-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
         </div>
     {% endif %}
     <div class="post-header">
@@ -18,7 +18,7 @@
         <hr>
         <p style="text-align: center;" class="post-content-p">{{ post.content }}</p>
     </div>
-    <p style="margin-top: 40px; font-size: 35px; opacity: 0.8;">- {{ post.date_posted.date() }}</p>
+    <p style="margin-top: 40px; font-size: 35px; opacity: 0.8;">- {{ post.date_posted.date() }} | {{ post.date_posted.strftime("%H") }}:{{ post.date_posted.strftime("%M") }}</p>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

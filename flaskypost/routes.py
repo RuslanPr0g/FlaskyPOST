@@ -7,10 +7,13 @@ from flaskypost.forms import RegistrationForm, LoginForm, UpdateProfileForm, Pos
 from flaskypost.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
+
 @app.route('/')
 def index():
-    posts = Post.query.all()
-    return render_template('index.html', posts=reversed(posts))
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(
+        Post.date_posted.desc()).paginate(page=page, per_page=6)
+    return render_template('index.html', posts=posts)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -137,3 +140,12 @@ def delete_post(post_id):
     db.session.commit()
     flash('Successfully!', 'success')
     return redirect(url_for('index'))
+
+
+@app.route('/user/<str:username>')
+def user(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user).order_by(
+        Post.date_posted.desc()).paginate(page=page, per_page=9)
+    return render_template('user_page.html', posts=posts, user=user)

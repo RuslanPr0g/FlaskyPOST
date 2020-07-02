@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap");
-
 body {
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
 }
 
 header {
@@ -26,9 +24,11 @@ h1 {
 .post {
   background-color: rgba(255, 193, 24, 0.9);
   padding: 20px;
+  margin: auto;
   margin-bottom: 99px;
   min-height: fit-content;
   min-width: 300px;
+  max-width: 930px;
 }
 
 .post-header {
