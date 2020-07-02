@@ -70,7 +70,7 @@ class RequestResetForm(FlaskForm):
             raise ValidationError('Email Doesn\'t Exist')
 
 
-class ResetPassword(FlaskForm):
+class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirmPassword = PasswordField(
         'Confirm Password', validators=[DataRequired(), EqualTo('password')])
