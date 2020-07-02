@@ -4,7 +4,7 @@ from flaskypost import db, bcrypt
 from flaskypost.models import User, Post
 from flaskypost.users.forms import (RegistrationForm, LoginForm, UpdateProfileForm,
                                     RequestResetForm, ResetPasswordForm)
-from flaskypost.users.utils import save_picture, send_reset_email
+from flaskypost.users.utils import save_image_for_user, send_token_by_email
 
 users = Blueprint('users', __name__)
 
