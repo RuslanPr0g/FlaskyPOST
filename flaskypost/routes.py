@@ -7,7 +7,6 @@ from flaskypost.forms import RegistrationForm, LoginForm, UpdateProfileForm, Pos
 from flaskypost.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-
 @app.route('/')
 def index():
     posts = Post.query.all()
