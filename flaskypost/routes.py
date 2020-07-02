@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, request, redirect, abort
 from flaskypost import app, db, bcrypt
-from flaskypost.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm
+from flaskypost.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm, RequestResetForm, ResetPasswordForm
 from flaskypost.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -149,3 +149,31 @@ def user(username):
     posts = Post.query.filter_by(author=user).order_by(
         Post.date_posted.desc()).paginate(page=page, per_page=9)
     return render_template('user_page.html', posts=posts, user=user)
+
+
+def send_token_by_email(user):
+
+
+@app.route('/password_reset', methods=['GET', 'POST'])
+def password_reset():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_token_by_email(user)
+        flash('Please, check your email.', 'success')
+        return redirect(url_for('login'))
+    return render_template('resetPassword.html', form=form)
+
+
+@app.route('/password_reset/<token>', methods=['GET', 'POST'])
+def password_reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('Time expired or you do not have the access.', 'warning')
+        return redirect(url_for('password_reset'))
+    form = ResetPasswordForm()
+    return render_template('password_reset_token.html', form=form)
