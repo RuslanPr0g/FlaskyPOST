@@ -86,7 +86,7 @@ def password_reset():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_token_by_email(user)
-        flash('Please, check your email.', 'success')
+        flash('Please, check your email. If you do not see any messages, then check the folder "Spam"', 'success')
         return redirect(url_for('users.login'))
     return render_template('resetPassword.html', form=form)
 

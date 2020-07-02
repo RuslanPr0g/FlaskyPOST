@@ -5,19 +5,28 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flaskypost.config import Config
 
-app = Flask(__name__)
-app.config.from_object(Config)
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 login_manager.login_view = 'users.login'
-mail = Mail(app)
+login_manager.login_message_category = 'info'
+mail = Mail()
 
+def create_app(config_class=Config):
+	app = Flask(__name__)
+	app.config.from_object(Config)
 
-from flaskypost.users.routes import users
-from flaskypost.posts.routes import posts
-from flaskypost.main.routes import main
+	db.init_app(app)
+	bcrypt.init_app(app)
+	login_manager.init_app(app)
+	mail.init_app(app)
 
-app.register_blueprint(users)
-app.register_blueprint(posts)
-app.register_blueprint(main)
+	from flaskypost.users.routes import users
+	from flaskypost.posts.routes import posts
+	from flaskypost.main.routes import main
+
+	app.register_blueprint(users)
+	app.register_blueprint(posts)
+	app.register_blueprint(main)
+
+	return app
